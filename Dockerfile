@@ -1,9 +1,5 @@
 FROM linuxserver/baseimage
 MAINTAINER Mark Burford  <sparklyballs@gmail.com>
-ENV DEBIAN_FRONTEND noninteractive
-ENV HOME /root
-ENV TERM screen
-
 
 #Applying stuff
 ADD excludes /etc/dpkg/dpkg.cfg.d/excludes
