@@ -73,9 +73,6 @@ ADD init/ /etc/my_init.d/
 ADD defaults/ /defaults/
 RUN chmod -v +x /etc/service/*/run && chmod -v +x /etc/my_init.d/*.sh
 
-#Adding abc user
-RUN useradd -u 911 -U -s /bin/false abc && usermod -G users abc
-
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
 
