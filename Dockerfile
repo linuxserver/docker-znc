@@ -3,7 +3,9 @@ MAINTAINER Mark Burford  <sparklyballs@gmail.com>
 
 #Applying stuff
 ADD excludes /etc/dpkg/dpkg.cfg.d/excludes
-RUN apt-get update -qq && \
+RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+echo "deb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
+apt-get update -qq && \
 # define configure options as a variable
 configOPTS="--enable-cyrus \
 --enable-python \
