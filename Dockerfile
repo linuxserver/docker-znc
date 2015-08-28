@@ -55,6 +55,15 @@ git clean -xdf && \
 $configOPTS && \
 make && \
 make install && \
+# add zncstrap
+git clone https://github.com/ProjectFirrre/zncstrap/ /zncstrap && \
+cd "/zncstrap" && \
+git checkout dev && \
+
+rm -Rf /usr/local/share/znc/webskins && \
+rm -Rf /usr/local/share/znc/modules && \
+mv webskins /usr/local/share/znc/ && \
+mv modules /usr/local/share/znc/ && \
 
 # clean up temporary build dependencies and install runtime deps
 apt-get purge --remove \
@@ -68,7 +77,7 @@ $runtimeDeps -qy && \
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 #Adding Custom files
-RUN mkdir /defaults 
+RUN mkdir /defaults
 ADD init/ /etc/my_init.d/
 ADD defaults/ /defaults/
 RUN chmod -v +x /etc/service/*/run && chmod -v +x /etc/my_init.d/*.sh
@@ -79,5 +88,3 @@ CMD ["/sbin/my_init"]
 # Volums and Ports
 VOLUME /config
 EXPOSE 6501
-
-
