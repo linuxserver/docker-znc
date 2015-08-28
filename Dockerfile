@@ -3,9 +3,7 @@ MAINTAINER Mark Burford  <sparklyballs@gmail.com>
 
 #Applying stuff
 ADD excludes /etc/dpkg/dpkg.cfg.d/excludes
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-echo "deb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-apt-get update -qq && \
+RUN apt-get update -qq && \
 # define configure options as a variable
 configOPTS="--enable-cyrus \
 --enable-python \
@@ -77,10 +75,12 @@ $runtimeDeps -qy && \
 apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
 
 #Adding Custom files
-RUN mkdir /defaults
 ADD init/ /etc/my_init.d/
+ADD services/ /etc/service/
+RUN chmod -v +x /etc/service/*/run
+RUN chmod -v +x /etc/my_init.d/*.sh
+RUN mkdir /defaults
 ADD defaults/ /defaults/
-RUN chmod -v +x /etc/service/*/run && chmod -v +x /etc/my_init.d/*.sh
 
 # Use baseimage-docker's init system
 CMD ["/sbin/my_init"]
