@@ -81,7 +81,6 @@ ADD init/ /etc/my_init.d/
 ADD services/ /etc/service/
 RUN chmod -v +x /etc/service/*/run
 RUN chmod -v +x /etc/my_init.d/*.sh
-RUN mkdir /defaults
 ADD defaults/ /defaults/
 
 # Use baseimage-docker's init system
