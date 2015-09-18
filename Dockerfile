@@ -1,5 +1,5 @@
 FROM linuxserver/baseimage
-MAINTAINER Mark Burford  <sparklyballs@gmail.com>
+MAINTAINER sparklyballs <sparklyballs@linuxserver.io>
 
 #Applying stuff
 ADD excludes /etc/dpkg/dpkg.cfg.d/excludes
