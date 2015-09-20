@@ -1,0 +1,4 @@
+#!/bin/bash
+
+umask 002
+exec /sbin/setuser abc /usr/local/bin/znc -d /config --foreground --debug "$@"
