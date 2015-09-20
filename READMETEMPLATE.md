@@ -44,7 +44,7 @@ To log in to the application, browse to https://<hostip>:6501.
 
 * Default User: admin
 * Default Password: password
-Please change this values ASAP.
+Please change this value ASAP.
 
 ## Versions
 
