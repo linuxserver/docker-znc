@@ -34,7 +34,6 @@ libperl-dev" && \
 
 # define runtime dependencies as a variable
 runtimeDeps="tcl8.6 \
-supervisor \
 libicu52 \
 libperl5.18" && \
 
