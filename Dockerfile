@@ -1,5 +1,5 @@
 FROM linuxserver/baseimage
-MAINTAINER sparklyballs <sparklyballs@linuxserver.io> Gonzalo Peci <pecigonzalo_docker@outlook.com>
+MAINTAINER sparklyballs <sparklyballs@linuxserver.io> Gonzalo Peci <davyjones@linuxserver.io>
 
 
 ENV BUILD_APTLIST="autoconf automake build-essential libicu-dev make pkg-config swig3.0 tcl8.6-dev"
