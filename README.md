@@ -2,7 +2,7 @@
 
 The [LinuxServer.io](https://www.linuxserver.io/) team brings you another quality container release featuring auto-update of dependencies on startup, easy user mapping and community support. Be sure to checkout our [forums](https://forum.linuxserver.io/index.php) or for real-time support our [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
 
-# linuxserver/znc
+# lsiodev/znc
 
 ![](http://wiki.znc.in/resources/assets/wiki.png)
 
