@@ -43,7 +43,7 @@ Part of what makes our containers work so well is by allowing you to specify you
 To log in to the application, browse to https://<hostip>:6501.
 
 * Default User: admin
-* Default Password: password
+* Default Password: admin
 Please change this value ASAP.
 
 ## Versions
