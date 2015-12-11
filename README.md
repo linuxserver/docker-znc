@@ -28,9 +28,9 @@ docker create \
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
 
-It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it <container-name> /bin/bash`.
+It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it znc /bin/bash`.
 
-* To monitor the logs of the container in realtime `docker logs -f <container-name>`.
+* To monitor the logs of the container in realtime `docker logs -f znc`.
 
 ### User / Group Identifiers
 
