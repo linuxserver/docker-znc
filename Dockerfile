@@ -29,16 +29,6 @@ git clean -xdf && \
 make && \
 make install && \
 
-# add zncstrap
-git clone https://github.com/ProjectFirrre/zncstrap/ /tmp/zncstrap && \
-cd /tmp/zncstrap && \
-git checkout dev && \
-
-rm -Rf /usr/local/share/znc/webskins && \
-rm -Rf /usr/local/share/znc/modules && \
-mv webskins /usr/local/share/znc/ && \
-mv modules /usr/local/share/znc/ && \
-
 # clean up temporary build dependencies and install runtime deps
 apt-get purge --remove \
 $BUILD_APTLIST -y && \
