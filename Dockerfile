@@ -12,9 +12,11 @@ RUN \
  apk add --no-cache --virtual=build-dependencies \
 	autoconf \
 	automake \
+	c-ares-dev \
 	cyrus-sasl-dev \
 	g++ \
 	gcc \
+	gettext-dev \
 	git \
 	icu-dev \
 	make \
@@ -31,15 +33,17 @@ RUN \
 
 # configure and compile znc
  cd "${ZNC_SRC}" && \
- git clean -xdf && \
+ export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./autogen.sh && \
  ./configure \
+	--build=$CBUILD \
 	--disable-ipv6 \
 	--enable-cyrus \
 	--enable-perl \
 	--enable-python \
 	--enable-swig \
-	--enable-tcl && \
+	--enable-tcl \
+	--host=$CHOST && \
  make && \
  make install && \
 
