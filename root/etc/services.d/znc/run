@@ -1,0 +1,5 @@
+#!/usr/bin/with-contenv sh
+umask 002
+
+exec s6-setuidgid abc /usr/local/bin/znc -d /config --foreground --debug "$@"
+
