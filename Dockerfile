@@ -2,10 +2,14 @@ FROM lsiobase/alpine
 MAINTAINER sparklyballs
 
 # package version
-ARG ZNC_VER="master"
+ARG ZNC_VER="git-2016-07-09"
+ARG ZNC_BRANCH="nightly"
 
 # environment settings
-ARG ZNC_SRC="/tmp/znc"
+ARG ZNC_ROOT="/tmp/source"
+ARG ZNC_SRC="${ZNC_ROOT}/znc"
+ARG ZNC_URL="http://znc.in"
+ARG ZNC_WWW="${ZNC_URL}/${ZNC_BRANCH}/znc-${ZNC_VER}.tar.gz"
 
 # install build packages
 RUN \
@@ -13,28 +17,32 @@ RUN \
 	autoconf \
 	automake \
 	c-ares-dev \
+	curl \
 	cyrus-sasl-dev \
 	g++ \
 	gcc \
 	gettext-dev \
-	git \
 	icu-dev \
 	make \
 	openssl-dev \
 	perl-dev \
 	python3-dev \
 	swig \
+	tar \
 	tcl-dev && \
 
-# fetch source code
- git clone \
- https://github.com/znc/znc.git -b \
-	"${ZNC_VER}" --recursive "${ZNC_SRC}" && \
+# fetch and unpack source
+ mkdir -p \
+	"${ZNC_SRC}" && \
+ curl -o \
+ "${ZNC_ROOT}/znc.tar.gz" -L \
+	"${ZNC_WWW}" && \
+ tar xf "${ZNC_ROOT}/znc.tar.gz" -C \
+	"${ZNC_SRC}" --strip-components=1 && \
 
 # configure and compile znc
  cd "${ZNC_SRC}" && \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
- ./autogen.sh && \
  ./configure \
 	--build=$CBUILD \
 	--disable-ipv6 \
@@ -43,7 +51,12 @@ RUN \
 	--enable-python \
 	--enable-swig \
 	--enable-tcl \
-	--host=$CHOST && \
+	--host=$CHOST \
+	--infodir=/usr/share/info \
+	--localstatedir=/var \
+	--mandir=/usr/share/man \
+	--prefix=/usr \
+	--sysconfdir=/etc \
  make && \
  make install && \
 

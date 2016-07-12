@@ -2,7 +2,7 @@
 
 mkdir -p /config/configs
 
-[[ ! -f /config/znc.pem ]] && /usr/local/bin/znc -d /config -p
+[[ ! -f /config/znc.pem ]] && /usr/bin/znc -d /config -p
 
 while [ ! -f "/config/znc.pem" ]; do
 echo "waiting for pem file to be generated"
