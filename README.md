@@ -1,6 +1,6 @@
 ![https://linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
 
-The [LinuxServer.io](https://www.linuxserver.io/) team brings you another quality container release featuring auto-update of dependencies on startup, easy user mapping and community support. Be sure to checkout our [forums](https://forum.linuxserver.io/index.php) or for real-time support our [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
+The [LinuxServer.io](https://www.linuxserver.io/) team brings you another quality container release featuring easy user mapping and community support. Be sure to checkout our [forums](https://forum.linuxserver.io/index.php) or for real-time support our [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`.
 
 # lsiodev/znc
 
@@ -13,9 +13,9 @@ The [LinuxServer.io](https://www.linuxserver.io/) team brings you another qualit
 ```
 docker create \
   --name=znc \
-  -v /etc/localtime:/etc/localtime:ro \
   -v <path to data>:/config \
   -e PGID=<gid> -e PUID=<uid>  \
+  -e TZ=<timezone> \
   -p 6501:6501 \
   lsiodev/znc
 ```
@@ -23,12 +23,12 @@ docker create \
 **Parameters**
 
 * `-p 6501` - the port(s)
-* `-v /etc/localtime` for timesync - *optional*
 * `-v /config` -
 * `-e PGID` for GroupID - see below for explanation
 * `-e PUID` for UserID - see below for explanation
+* `-e TZ` for timezone EG. Europe/London
 
-It is based on phusion-baseimage with ssh removed, for shell access whilst the container is running do `docker exec -it znc /bin/bash`.
+It is based on alpine linux with s6 overlay, for shell access whilst the container is running do `docker exec -it znc /bin/bash`.
 
 * To monitor the logs of the container in realtime `docker logs -f znc`.
 
@@ -48,4 +48,5 @@ Please change this value ASAP.
 
 ## Versions
 
-+ **11.12.2015:** Initial Release.
++ **12.07.16:** Rebase to alpine linux
++ **11.12.15:** Initial Release.
