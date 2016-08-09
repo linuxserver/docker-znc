@@ -2,14 +2,8 @@ FROM lsiobase/alpine
 MAINTAINER sparklyballs
 
 # package version
-ARG ZNC_VER="git-2016-07-09"
+ARG ZNC_VER="2016-08-01"
 ARG ZNC_BRANCH="nightly"
-
-# environment settings
-ARG ZNC_ROOT="/tmp/source"
-ARG ZNC_SRC="${ZNC_ROOT}/znc"
-ARG ZNC_URL="http://znc.in"
-ARG ZNC_WWW="${ZNC_URL}/${ZNC_BRANCH}/znc-${ZNC_VER}.tar.gz"
 
 # install build packages
 RUN \
@@ -33,15 +27,15 @@ RUN \
 
 # fetch and unpack source
  mkdir -p \
-	"${ZNC_SRC}" && \
+	/tmp/znc && \
  curl -o \
- "${ZNC_ROOT}/znc.tar.gz" -L \
-	"${ZNC_WWW}" && \
- tar xf "${ZNC_ROOT}/znc.tar.gz" -C \
-	"${ZNC_SRC}" --strip-components=1 && \
+ /tmp/znc-src.tar.gz -L \
+	"http://znc.in/${ZNC_BRANCH}/znc-git-${ZNC_VER}.tar.gz" && \
+ tar xf /tmp/znc-src.tar.gz -C \
+	/tmp/znc --strip-components=1 && \
 
 # configure and compile znc
- cd "${ZNC_SRC}" && \
+ cd /tmp/znc && \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./configure \
 	--build=$CBUILD \
