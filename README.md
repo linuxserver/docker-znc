@@ -6,7 +6,7 @@ The [LinuxServer.io](https://linuxserver.io) team brings you another container r
 * [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 
-# lsiodev/znc
+# linuxserver/znc
 
 ![](http://wiki.znc.in/resources/assets/wiki.png)
 
@@ -21,7 +21,7 @@ docker create \
   -e PGID=<gid> -e PUID=<uid>  \
   -e TZ=<timezone> \
   -p 6501:6501 \
-  lsiodev/znc
+  linuxserver/znc
 ```
 
 **Parameters**
@@ -62,5 +62,6 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
-+ **20.08.16:** Rebase to alpine linux
++ **20.08.16:** Rebase to alpine linux,
+move to main repository.
 + **11.12.15:** Initial Release.
