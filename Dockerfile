@@ -2,8 +2,7 @@ FROM lsiobase/alpine
 MAINTAINER sparklyballs
 
 # package version
-ARG ZNC_VER="2016-08-01"
-ARG ZNC_BRANCH="nightly"
+ARG ZNC_VER="latest"
 
 # install build packages
 RUN \
@@ -30,7 +29,7 @@ RUN \
 	/tmp/znc && \
  curl -o \
  /tmp/znc-src.tar.gz -L \
-	"http://znc.in/${ZNC_BRANCH}/znc-git-${ZNC_VER}.tar.gz" && \
+	"http://znc.in/nightly/znc-${ZNC_VER}.tar.gz" && \
  tar xf /tmp/znc-src.tar.gz -C \
 	/tmp/znc --strip-components=1 && \
 

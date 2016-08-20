@@ -62,5 +62,5 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
-+ **08.08.16:** Rebase to alpine linux
++ **20.08.16:** Rebase to alpine linux
 + **11.12.15:** Initial Release.
