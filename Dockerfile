@@ -1,51 +1,72 @@
-FROM linuxserver/baseimage
-MAINTAINER sparklyballs <sparklyballs@linuxserver.io> Gonzalo Peci <davyjones@linuxserver.io>
+FROM lsiobase/alpine
+MAINTAINER sparklyballs
 
+# package version
+ARG ZNC_VER="latest"
 
-ENV BUILD_APTLIST="autoconf automake build-essential libicu-dev make pkg-config swig3.0 tcl8.6-dev"
-ENV APTLIST="--no-install-recommends git-core libperl-dev libpython3-dev libsasl2-dev libssl-dev python3-dev libicu52 libperl5.18 tcl8.6"
+# install build packages
+RUN \
+ apk add --no-cache --virtual=build-dependencies \
+	autoconf \
+	automake \
+	c-ares-dev \
+	curl \
+	cyrus-sasl-dev \
+	g++ \
+	gcc \
+	gettext-dev \
+	icu-dev \
+	make \
+	openssl-dev \
+	perl-dev \
+	python3-dev \
+	swig \
+	tar \
+	tcl-dev && \
 
-# Install build packages
-RUN echo "deb http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-echo "deb-src http://archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse" >> /etc/apt/sources.list && \
-apt-get update -q && \
-apt-get install \
-$BUILD_APTLIST \
-$APTLIST -qy && \
+# fetch and unpack source
+ mkdir -p \
+	/tmp/znc && \
+ curl -o \
+ /tmp/znc-src.tar.gz -L \
+	"http://znc.in/nightly/znc-${ZNC_VER}.tar.gz" && \
+ tar xf /tmp/znc-src.tar.gz -C \
+	/tmp/znc --strip-components=1 && \
 
-# build ZNC from git
-git clone https://github.com/znc/znc.git --recursive /tmp/znc && \
+# configure and compile znc
+ cd /tmp/znc && \
+ export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
+ ./configure \
+	--build=$CBUILD \
+	--disable-ipv6 \
+	--enable-cyrus \
+	--enable-perl \
+	--enable-python \
+	--enable-swig \
+	--enable-tcl \
+	--host=$CHOST \
+	--infodir=/usr/share/info \
+	--localstatedir=/var \
+	--mandir=/usr/share/man \
+	--prefix=/usr \
+	--sysconfdir=/etc \
+ make && \
+ make install && \
 
-cd /tmp/znc && \
-git clean -xdf && \
-./autogen.sh && \
-./configure \
---enable-cyrus \
---enable-python \
---enable-swig \
---enable-tcl \
---enable-perl \
---disable-ipv6 && \
-make && \
-make install && \
+# cleanup
+ apk del --purge \
+	build-dependencies && \
+ rm -rf \
+	/tmp/*
 
-# clean up temporary build dependencies and install runtime deps
-apt-get purge --remove \
-$BUILD_APTLIST -y && \
-apt-get autoremove -y && \
-apt-get install \
-$APTLIST -qy && \
+# install runtime packages
+RUN \
+ apk add --no-cache \
+	icu-libs
 
-# clean up
-apt-get clean && rm -rf /tmp/* /var/lib/apt/lists/* /var/tmp/*
+# add local files
+COPY /root /
 
-# Adding Custom files
-ADD defaults/ /defaults/
-ADD init/ /etc/my_init.d/
-ADD services/ /etc/service/
-RUN chmod -v +x /etc/service/*/run /etc/my_init.d/*.sh
-
-# Volums and Ports
-VOLUME /config
+# ports and volumes
 EXPOSE 6501
-
+VOLUME /config
