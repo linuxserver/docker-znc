@@ -8,9 +8,11 @@ The [LinuxServer.io](https://linuxserver.io) team brings you another container r
 
 # linuxserver/znc
 
-![](http://wiki.znc.in/resources/assets/wiki.png)
 
 [ZNC](http://wiki.znc.in/ZNC)  is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.
+
+[![znc](http://wiki.znc.in/resources/assets/wiki.png)][zncurl]
+[zncurl]: http://wiki.znc.in/ZNC
 
 ## Usage
 
@@ -62,6 +64,7 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
++ **28.08.16:** Add badges to README.
 + **20.08.16:** Rebase to alpine linux,
 move to main repository.
 + **11.12.15:** Initial Release.
