@@ -1,18 +1,20 @@
-![https://linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)
+[linuxserverurl]: https://linuxserver.io
+[forumurl]: https://forum.linuxserver.io
+[ircurl]: https://www.linuxserver.io/index.php/irc/
+[podcasturl]: https://www.linuxserver.io/index.php/category/podcast/
 
-The [LinuxServer.io](https://linuxserver.io) team brings you another container release featuring easy user mapping and community support. Find us for support at:
-* [forum.linuxserver.io](https://forum.linuxserver.io)
-* [IRC](https://www.linuxserver.io/index.php/irc/) on freenode at `#linuxserver.io`
-* [Podcast](https://www.linuxserver.io/index.php/category/podcast/) covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
+[![linuxserver.io](https://www.linuxserver.io/wp-content/uploads/2015/06/linuxserver_medium.png)][linuxserverurl]
 
+The [LinuxServer.io][linuxserverurl] team brings you another container release featuring easy user mapping and community support. Find us for support at:
+* [forum.linuxserver.io][forumurl]
+* [IRC][ircurl] on freenode at `#linuxserver.io`
+* [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # linuxserver/znc
-[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/znc.svg)][hub]
-[![Docker Stars](https://img.shields.io/docker/stars/linuxserver/znc.svg)][hub]
-[![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-znc)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-znc/)
+[![](https://images.microbadger.com/badges/image/linuxserver/znc.svg)](http://microbadger.com/images/linuxserver/znc "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/znc.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/znc.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-znc)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-znc/)
 [hub]: https://hub.docker.com/r/linuxserver/znc/
 
-[ZNC](http://wiki.znc.in/ZNC)  is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.
+[ZNC][zncurl] is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.
 
 [![znc](http://wiki.znc.in/resources/assets/wiki.png)][zncurl]
 [zncurl]: http://wiki.znc.in/ZNC
@@ -67,6 +69,7 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
++ **11.09.16:** Add layer badges to README.
 + **28.08.16:** Add badges to README.
 + **20.08.16:** Rebase to alpine linux,
 move to main repository.
