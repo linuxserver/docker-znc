@@ -1,6 +1,6 @@
 #!/usr/bin/with-contenv sh
 
-umask 002
+umask 022
 
 exec \
 	s6-setuidgid abc /usr/bin/znc -d /config \
