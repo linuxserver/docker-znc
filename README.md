@@ -11,7 +11,7 @@ The [LinuxServer.io][linuxserverurl] team brings you another container release f
 * [Podcast][podcasturl] covers everything to do with getting the most from your Linux Server plus a focus on all things Docker and containerisation!
 
 # linuxserver/znc
-[![](https://images.microbadger.com/badges/image/linuxserver/znc.svg)](http://microbadger.com/images/linuxserver/znc "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/znc.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/znc.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-znc)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-znc/)
+[![](https://images.microbadger.com/badges/version/linuxserver/znc.svg)](https://microbadger.com/images/linuxserver/znc "Get your own version badge on microbadger.com")[![](https://images.microbadger.com/badges/image/linuxserver/znc.svg)](http://microbadger.com/images/linuxserver/znc "Get your own image badge on microbadger.com")[![Docker Pulls](https://img.shields.io/docker/pulls/linuxserver/znc.svg)][hub][![Docker Stars](https://img.shields.io/docker/stars/linuxserver/znc.svg)][hub][![Build Status](http://jenkins.linuxserver.io:8080/buildStatus/icon?job=Dockers/LinuxServer.io/linuxserver-znc)](http://jenkins.linuxserver.io:8080/job/Dockers/job/LinuxServer.io/job/linuxserver-znc/)
 [hub]: https://hub.docker.com/r/linuxserver/znc/
 
 [ZNC][zncurl] is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.
@@ -67,8 +67,17 @@ To log in to the application, browse to https://<hostip>:6501.
 * To monitor the logs of the container in realtime: `docker logs -f znc`
 
 
+* container version number 
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' znc`
+
+* image version number
+
+`docker inspect -f '{{ index .Config.Labels "build_version" }}' linuxserver/znc`
+
 ## Versions
 
++ **14-10-16:** Add version layer information.
 + **30.09.16:** Fix umask.
 + **11.09.16:** Add layer badges to README.
 + **28.08.16:** Add badges to README.
