@@ -20,6 +20,7 @@ RUN \
 	g++ \
 	gcc \
 	gettext-dev \
+	git \
 	icu-dev \
 	make \
 	openssl-dev \
@@ -43,7 +44,6 @@ RUN \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./configure \
 	--build=$CBUILD \
-	--disable-ipv6 \
 	--enable-cyrus \
 	--enable-perl \
 	--enable-python \
@@ -54,20 +54,26 @@ RUN \
 	--localstatedir=/var \
 	--mandir=/usr/share/man \
 	--prefix=/usr \
-	--sysconfdir=/etc \
+	--sysconfdir=/etc && \
  make && \
  make install && \
+
+# determine build packages to keep
+ RUNTIME_PACKAGES="$( \
+	scanelf --needed --nobanner /usr/bin/znc \
+	| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
+	| sort -u \
+	| xargs -r apk info --installed \
+	| sort -u \
+	)" && \
+ apk add --no-cache \
+	${RUNTIME_PACKAGES} && \
 
 # cleanup
  apk del --purge \
 	build-dependencies && \
  rm -rf \
 	/tmp/*
-
-# install runtime packages
-RUN \
- apk add --no-cache \
-	icu-libs
 
 # add local files
 COPY /root /
