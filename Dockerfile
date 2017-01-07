@@ -67,7 +67,8 @@ RUN \
 	| sort -u \
 	)" && \
  apk add --no-cache \
-	${RUNTIME_PACKAGES} && \
+	${RUNTIME_PACKAGES} \
+	ca-certificates && \
 
 # cleanup
  apk del --purge \
