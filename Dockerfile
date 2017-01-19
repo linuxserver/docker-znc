@@ -36,8 +36,15 @@ RUN \
  curl -o \
  /tmp/znc-src.tar.gz -L \
 	"http://znc.in/nightly/znc-${ZNC_VER}.tar.gz" && \
- tar xf /tmp/znc-src.tar.gz -C \
+ tar xf \
+ /tmp/znc-src.tar.gz -C \
 	/tmp/znc --strip-components=1 && \
+ curl -o \
+ /tmp/playback.tar.gz -L \
+	https://github.com/jpnurmi/znc-playback/archive/master.tar.gz && \
+ tar xf \
+ /tmp/playback.tar.gz -C \
+	/tmp/znc/modules --strip-components=1 && \
 
 # configure and compile znc
  cd /tmp/znc && \
