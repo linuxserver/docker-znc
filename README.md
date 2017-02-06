@@ -83,11 +83,11 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
++ **06.02.17:** Rebase alpine linux 3.5.
 + **19.01.17:** Add playback module.
 + **07.01.17:** Add ca-certificates package, resolve sasl issues.
 + **07.12.16:** Use scanelf to determine runtime dependencies.
 fix error with `\` instead of `&&\`.
-
 + **14.10.16:** Add version layer information.
 + **30.09.16:** Fix umask.
 + **11.09.16:** Add layer badges to README.
