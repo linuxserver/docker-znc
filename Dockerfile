@@ -1,15 +1,14 @@
-FROM lsiobase/alpine
+FROM lsiobase/alpine:3.5
 MAINTAINER sparklyballs
-
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
 
-# package version
+# package version
 ARG ZNC_VER="latest"
 
-# install build packages
+# install build packages
 RUN \
  apk add --no-cache --virtual=build-dependencies \
 	autoconf \
@@ -30,7 +29,7 @@ RUN \
 	tar \
 	tcl-dev && \
 
-# fetch and unpack source
+# fetch and unpack source
  mkdir -p \
 	/tmp/znc && \
  curl -o \
@@ -46,7 +45,7 @@ RUN \
  /tmp/playback.tar.gz -C \
 	/tmp/znc/modules --strip-components=1 && \
 
-# configure and compile znc
+# configure and compile znc
  cd /tmp/znc && \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./configure \
@@ -77,15 +76,15 @@ RUN \
 	${RUNTIME_PACKAGES} \
 	ca-certificates && \
 
-# cleanup
+# cleanup
  apk del --purge \
 	build-dependencies && \
  rm -rf \
 	/tmp/*
 
-# add local files
+# add local files
 COPY /root /
 
-# ports and volumes
+# ports and volumes
 EXPOSE 6501
 VOLUME /config
