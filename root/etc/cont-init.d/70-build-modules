@@ -1,0 +1,20 @@
+#!/usr/bin/with-contenv sh
+
+# Build modules from source.
+if [ -d "/config/modules" ]; then
+  # Store current directory.
+  cwd="$(pwd)"
+
+  # Find module sources.
+  modules=$(find "/config/modules" -name "*.cpp")
+
+  # Build modules.
+  for module in $modules; do
+    echo "Building module $module..."
+    cd "$(dirname "$module")"
+    znc-buildmod "$module" || exit 1
+  done
+
+  # Go back to original directory.
+  cd "$cwd"
+fi
