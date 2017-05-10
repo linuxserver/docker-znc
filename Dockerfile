@@ -77,8 +77,6 @@ RUN \
 	ca-certificates && \
 
 # cleanup
- apk del --purge \
-	build-dependencies && \
  rm -rf \
 	/tmp/*
 
