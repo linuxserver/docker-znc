@@ -45,6 +45,13 @@ RUN \
  tar xf \
  /tmp/playback.tar.gz -C \
 	/tmp/znc/modules --strip-components=1 && \
+ curl -o \
+ /tmp/znc-push.tar.gz -L \
+	https://github.com/jreese/znc-push/archive/master.tar.gz && \
+ tar xf \
+ /tmp/znc-push.tar.gz -C \
+	/tmp/znc/modules --strip-components=1 && \
+
 
 # configure and compile znc
  cd /tmp/znc && \
