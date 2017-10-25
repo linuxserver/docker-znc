@@ -83,6 +83,7 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
++ **25.10.17:** Remove debug switch from run command.
 + **26.05.17:** Rebase alpine linux 3.6.
 + **06.02.17:** Rebase alpine linux 3.5.
 + **19.01.17:** Add playback module.
