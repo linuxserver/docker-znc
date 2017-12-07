@@ -1,16 +1,16 @@
-FROM lsiobase/alpine:3.6
-MAINTAINER sparklyballs
+FROM lsiobase/alpine:3.7
 
 # set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="sparklyballs"
 
 # package version
 ARG ZNC_VER="latest"
 
-# install build packages
 RUN \
+ echo "**** install build packages ****" && \
  apk add --no-cache --virtual=build-dependencies \
 	autoconf \
 	automake \
@@ -29,8 +29,7 @@ RUN \
 	swig \
 	tar \
 	tcl-dev && \
-
-# fetch and unpack source
+ echo "**** compile znc ****" && \
  mkdir -p \
 	/tmp/znc && \
  curl -o \
@@ -45,8 +44,6 @@ RUN \
  tar xf \
  /tmp/playback.tar.gz -C \
 	/tmp/znc/modules --strip-components=1 && \
-
-# configure and compile znc
  cd /tmp/znc && \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./configure \
@@ -62,10 +59,22 @@ RUN \
 	--mandir=/usr/share/man \
 	--prefix=/usr \
 	--sysconfdir=/etc && \
- make && \
+ echo "**** attempt to set number of cores available for make to use ****" && \
+ set -ex && \
+ CPU_CORES=$( < /proc/cpuinfo grep -c processor ) || echo "failed cpu look up" && \
+ if echo $CPU_CORES | grep -E  -q '^[0-9]+$'; then \
+	: ;\
+ if [ "$CPU_CORES" -gt 7 ]; then \
+	CPU_CORES=$(( CPU_CORES  - 3 )); \
+ elif [ "$CPU_CORES" -gt 5 ]; then \
+	CPU_CORES=$(( CPU_CORES  - 2 )); \
+ elif [ "$CPU_CORES" -gt 3 ]; then \
+	CPU_CORES=$(( CPU_CORES  - 1 )); fi \
+ else CPU_CORES="1"; fi && \
+ make -j $CPU_CORES && \
+ set +ex && \
  make install && \
-
-# determine build packages to keep
+ echo "**** determine build packages to keep ****" && \
  RUNTIME_PACKAGES="$( \
 	scanelf --needed --nobanner /usr/bin/znc \
 	| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
@@ -76,8 +85,7 @@ RUN \
  apk add --no-cache \
 	${RUNTIME_PACKAGES} \
 	ca-certificates && \
-
-# cleanup
+ echo "**** cleanup ****" && \
  apk del --purge \
 	build-dependencies && \
  rm -rf \
