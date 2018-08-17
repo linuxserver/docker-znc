@@ -83,6 +83,7 @@ To log in to the application, browse to https://<hostip>:6501.
 
 ## Versions
 
++ **17.06.18:** Rebase to alpine 3.8, use buildstage.
 + **03.01.18:** Deprecate cpu_core routine lack of scaling.
 + **07.12.17:** Rebase alpine linux 3.7.
 + **25.10.17:** Remove debug switch from run command.
