@@ -1,17 +1,12 @@
-FROM lsiobase/alpine:3.7
-
-# set version label
-ARG BUILD_DATE
-ARG VERSION
-LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+FROM lsiobase/alpine:3.8 as buildstage
+############## build stage ##############
 
 # package version
 ARG ZNC_VER="latest"
 
 RUN \
  echo "**** install build packages ****" && \
- apk add --no-cache --virtual=build-dependencies \
+ apk add --no-cache \
 	autoconf \
 	automake \
 	c-ares-dev \
@@ -28,7 +23,9 @@ RUN \
 	python3-dev \
 	swig \
 	tar \
-	tcl-dev && \
+	tcl-dev
+
+RUN \
  echo "**** compile znc ****" && \
  mkdir -p \
 	/tmp/znc && \
@@ -60,26 +57,39 @@ RUN \
 	--prefix=/usr \
 	--sysconfdir=/etc && \
  make && \
- make install && \
- echo "**** determine build packages to keep ****" && \
- RUNTIME_PACKAGES="$( \
-	scanelf --needed --nobanner /usr/bin/znc \
+ make  DESTDIR=/tmp/znc install
+
+RUN \
+ echo "**** determine runtime packages ****" && \
+ scanelf --needed --nobanner /tmp/znc/usr/bin/znc \
 	| awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
 	| sort -u \
 	| xargs -r apk info --installed \
 	| sort -u \
-	)" && \
- apk add --no-cache \
-	${RUNTIME_PACKAGES} \
-	ca-certificates && \
- echo "**** cleanup ****" && \
- apk del --purge \
-	build-dependencies && \
- rm -rf \
-	/tmp/*
+	>> /tmp/znc/packages
+############## runtime stage ##############
 
-# add local files
-COPY /root /
+FROM lsiobase/alpine:3.8
+
+# set version label
+ARG BUILD_DATE
+ARG VERSION
+LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
+LABEL maintainer="sparklyballs"
+
+# copy files from build stage
+COPY --from=buildstage /tmp/znc/usr/ /usr/
+COPY --from=buildstage /tmp/znc/packages /packages
+
+RUN \
+ echo "**** install runtime packages ****" && \
+ RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
+ apk add --no-cache \
+	ca-certificates \
+	${RUNTIME_PACKAGES}
+
+# copy local files
+COPY root/ /
 
 # ports and volumes
 EXPOSE 6501
