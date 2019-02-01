@@ -1,0 +1,28 @@
+---
+
+# jenkins variables
+project_name: docker-znc
+external_type: custom_json
+release_type: stable
+release_tag: latest
+ls_branch: master
+repo_vars:
+  - JSON_URL = 'https://api.github.com/repos/znc/znc/tags'
+  - JSON_PATH = '.[0].name'
+  - BUILD_VERSION_ARG = 'ZNC_RELEASE'
+  - LS_USER = 'linuxserver'
+  - LS_REPO = 'docker-znc'
+  - CONTAINER_NAME = 'znc'
+  - DOCKERHUB_IMAGE = 'linuxserver/znc'
+  - DEV_DOCKERHUB_IMAGE = 'lsiodev/znc'
+  - PR_DOCKERHUB_IMAGE = 'lspipepr/znc'
+  - DIST_IMAGE = 'alpine'
+  - MULTIARCH='true'
+  - CI='true'
+  - CI_WEB='false'
+  - CI_PORT='6501'
+  - CI_SSL='false'
+  - CI_DELAY='30'
+  - CI_DOCKERENV='TZ=US/Pacific'
+  - CI_AUTH='user:password'
+  - CI_WEBPATH=''
