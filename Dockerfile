@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.8 as buildstage
+FROM lsiobase/alpine:3.9 as buildstage
 ############## build stage ##############
 
 # package version
@@ -86,7 +86,7 @@ RUN \
 	>> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM lsiobase/alpine:3.8
+FROM lsiobase/alpine:3.9
 
 # set version label
 ARG BUILD_DATE
