@@ -111,7 +111,7 @@ In this instance `PUID=1000` and `PGID=1000`, to find yours use `id user` as bel
 &nbsp;
 ## Application Setup
 
-To log in to the application, browse to https://<hostip>:6501.
+To log in to the application, browse to http://<hostip>:6501.
 
 * Default User: admin
 * Default Password: admin
