@@ -44,7 +44,7 @@ optional_block_1: false
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  To log in to the application, browse to https://<hostip>:6501.
+  To log in to the application, browse to http://<hostip>:6501.
 
   * Default User: admin
   * Default Password: admin
