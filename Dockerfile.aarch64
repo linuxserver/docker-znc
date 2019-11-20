@@ -58,6 +58,12 @@ RUN \
  tar xf \
  /tmp/znc-clientbuffer.tar.gz -C \
         /tmp/znc/modules --strip-components=1 && \
+ curl -o \
+ /tmp/znc-palaver.tar.gz -L \
+        https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz && \
+ tar xf \
+ /tmp/znc-palaver.tar.gz -C \
+        /tmp/znc/modules --strip-components=1 && \
  cd /tmp/znc && \
  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
  ./configure \
