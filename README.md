@@ -209,6 +209,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **19.12.19:** - Rebasing to alpine 3.11.
 * **02.11.19:** - Add znc-palaver module.
 * **28.06.19:** - Rebasing to alpine 3.10.
 * **23.03.19:** - Switching to new Base images, shift to arm32v7 tag.
