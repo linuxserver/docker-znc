@@ -1,4 +1,4 @@
-FROM lsiobase/alpine:3.12 as buildstage
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12 as buildstage
 ############## build stage ##############
 
 # package version
@@ -92,7 +92,7 @@ RUN \
 	>> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM lsiobase/alpine:3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:3.12
 
 # set version label
 ARG BUILD_DATE
