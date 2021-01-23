@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.12 as buildstage
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.13 as buildstage
 ############## build stage ##############
 
 # package version
@@ -92,7 +92,7 @@ RUN \
 	>> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.12
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.13
 
 # set version label
 ARG BUILD_DATE
