@@ -3,5 +3,5 @@
 umask 022
 
 exec \
-	s6-setuidgid abc /usr/bin/znc -d /config \
-	--foreground
+    s6-setuidgid abc /usr/bin/znc -d /config \
+    --foreground
