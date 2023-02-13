@@ -1,22 +1,25 @@
-#!/usr/bin/with-contenv sh
+#!/usr/bin/with-contenv bash
+# shellcheck shell=bash
 
 # make folders
 mkdir -p \
     /config/configs
 
 # generate license file
-[[ ! -f /config/znc.pem ]] && \
+if [[ ! -f /config/znc.pem ]]; then
     /usr/bin/znc -d /config -p
+fi
 
-while [ ! -f "/config/znc.pem" ]; do
+while [[ ! -f "/config/znc.pem" ]]; do
     echo "waiting for pem file to be generated"
-    sleep 1s
+    sleep 2s
 done
 
 # copy config
-[[ ! -f /config/configs/znc.conf ]] && \
+if [[ ! -f /config/configs/znc.conf ]]; then
     cp /defaults/znc.conf /config/configs/znc.conf
+fi
 
 # permissions
-chown -R abc:abc \
+lsiown -R abc:abc \
     /config

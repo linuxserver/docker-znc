@@ -1,4 +1,6 @@
-FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.15 as buildstage
+# syntax=docker/dockerfile:1
+
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.17 as buildstage
 ############## build stage ##############
 
 # package version
@@ -10,14 +12,12 @@ RUN \
     autoconf \
     automake \
     c-ares-dev \
-    curl \
     cyrus-sasl-dev \
     g++ \
     gcc \
     gettext-dev \
     git \
     icu-dev \
-    jq \
     make \
     openssl-dev \
     perl-dev \
@@ -54,10 +54,10 @@ RUN \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
   /tmp/znc-clientbuffer.tar.gz -L \
-        https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
+    https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
   tar xf \
   /tmp/znc-clientbuffer.tar.gz -C \
-        /tmp/znc/modules --strip-components=1 && \
+    /tmp/znc/modules --strip-components=1 && \
   curl -o \
   /tmp/znc-palaver.tar.gz -L \
     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz && \
@@ -80,7 +80,7 @@ RUN \
     --prefix=/usr \
     --sysconfdir=/etc && \
   make && \
-  make  DESTDIR=/tmp/znc install
+  make DESTDIR=/tmp/znc install
 
 RUN \
   echo "**** determine runtime packages ****" && \
@@ -92,7 +92,7 @@ RUN \
     >> /tmp/znc/packages
 ############## runtime stage ##############
 
-FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.15
+FROM ghcr.io/linuxserver/baseimage-alpine:arm32v7-3.17
 
 # set version label
 ARG BUILD_DATE
@@ -108,7 +108,6 @@ RUN \
   echo "**** install runtime packages ****" && \
   RUNTIME_PACKAGES=$(echo $(cat /packages)) && \
   apk add -U --update --no-cache \
-    ca-certificates \
     ${RUNTIME_PACKAGES}
 
 # copy local files
