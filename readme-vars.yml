@@ -7,32 +7,27 @@ project_logo: "http://wiki.znc.in/resources/assets/wiki.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 project_blurb_optional_extras_enabled: false
-
 # supported architectures
 available_architectures:
-  - { arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
-  - { arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
-  - { arch: "{{ arch_armhf }}", tag: "arm32v7-latest"}
-
+  - {arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
+  - {arch: "{{ arch_arm64 }}", tag: "arm64v8-latest"}
 # development version
 development_versions: false
-
 # container parameters
 common_param_env_vars_enabled: true
 param_container_name: "{{ project_name }}"
 param_usage_include_net: false
 param_usage_include_env: true
 param_env_vars:
-  - { env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London." }
+  - {env_var: "TZ", env_value: "Europe/London", desc: "Specify a timezone to use EG Europe/London."}
 param_usage_include_vols: true
 param_volumes:
-  - { vol_path: "/config", vol_host_path: "/path/to/data", desc: "Where local ZNC data is stored." }
+  - {vol_path: "/config", vol_host_path: "/path/to/data", desc: "Where local ZNC data is stored."}
 param_usage_include_ports: true
 param_ports:
-  - { external_port: "6501", internal_port: "6501", port_desc: "Port ZNC listens on." }
+  - {external_port: "6501", internal_port: "6501", port_desc: "Port ZNC listens on."}
 param_device_map: false
 cap_add_param: false
-
 # optional container parameters
 opt_param_usage_include_env: false
 opt_param_usage_include_vols: false
@@ -40,7 +35,6 @@ opt_param_usage_include_ports: false
 opt_param_device_map: false
 opt_cap_add_param: false
 optional_block_1: false
-
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -49,31 +43,31 @@ app_setup_block: |
   * Default User: admin
   * Default Password: admin
   `change password ASAP.`
-
 # changelog
 changelogs:
-  - { date: "13.02.23:", desc: "Rebase to Alpine 3.17, migrate to s6v3." }
-  - { date: "19.01.22:", desc: "Rebasing to alpine 3.15." }
-  - { date: "01.06.20:", desc: "Rebasing to alpine 3.12." }
-  - { date: "19.12.19:", desc: "Rebasing to alpine 3.11." }
-  - { date: "02.11.19:", desc: "Add znc-palaver module." }
-  - { date: "28.06.19:", desc: "Rebasing to alpine 3.10." }
-  - { date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag." }
-  - { date: "22.02.19:", desc: "Rebasing to alpine 3.9." }
-  - { date: "31.01.19:", desc: "Add pipeline logic and multi arch." }
-  - { date: "30.01.19:", desc: "Add push and clientbuffer modules." }
-  - { date: "17.08.18:", desc: "Rebase to alpine 3.8, use buildstage." }
-  - { date: "03.01.18:", desc: "Deprecate cpu_core routine lack of scaling." }
-  - { date: "07.12.17:", desc: "Rebase alpine linux 3.7." }
-  - { date: "25.10.17:", desc: "Remove debug switch from run command." }
-  - { date: "26.05.17:", desc: "Rebase alpine linux 3.6." }
-  - { date: "06.02.17:", desc: "Rebase alpine linux 3.5." }
-  - { date: "19.01.17:", desc: "Add playback module." }
-  - { date: "07.01.17:", desc: "Add ca-certificates package, resolve sasl issues." }
-  - { date: "07.12.16:", desc: "Use scanelf to determine runtime dependencies. Fix error with continuation." }
-  - { date: "14.10.16:", desc: "Add version layer information." }
-  - { date: "30.09.16:", desc: "Fix umask." }
-  - { date: "11.09.16:", desc: "Add layer badges to README." }
-  - { date: "28.08.16:", desc: "Add badges to README." }
-  - { date: "20.08.16:", desc: "Rebase to alpine linux, move to main repository." }
-  - { date: "11.12.15:", desc: "Initial Release." }
+  - {date: "07.07.23:", desc: "Deprecate armhf. As announced [here](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)"}
+  - {date: "13.02.23:", desc: "Rebase to Alpine 3.17, migrate to s6v3."}
+  - {date: "19.01.22:", desc: "Rebasing to alpine 3.15."}
+  - {date: "01.06.20:", desc: "Rebasing to alpine 3.12."}
+  - {date: "19.12.19:", desc: "Rebasing to alpine 3.11."}
+  - {date: "02.11.19:", desc: "Add znc-palaver module."}
+  - {date: "28.06.19:", desc: "Rebasing to alpine 3.10."}
+  - {date: "23.03.19:", desc: "Switching to new Base images, shift to arm32v7 tag."}
+  - {date: "22.02.19:", desc: "Rebasing to alpine 3.9."}
+  - {date: "31.01.19:", desc: "Add pipeline logic and multi arch."}
+  - {date: "30.01.19:", desc: "Add push and clientbuffer modules."}
+  - {date: "17.08.18:", desc: "Rebase to alpine 3.8, use buildstage."}
+  - {date: "03.01.18:", desc: "Deprecate cpu_core routine lack of scaling."}
+  - {date: "07.12.17:", desc: "Rebase alpine linux 3.7."}
+  - {date: "25.10.17:", desc: "Remove debug switch from run command."}
+  - {date: "26.05.17:", desc: "Rebase alpine linux 3.6."}
+  - {date: "06.02.17:", desc: "Rebase alpine linux 3.5."}
+  - {date: "19.01.17:", desc: "Add playback module."}
+  - {date: "07.01.17:", desc: "Add ca-certificates package, resolve sasl issues."}
+  - {date: "07.12.16:", desc: "Use scanelf to determine runtime dependencies. Fix error with continuation."}
+  - {date: "14.10.16:", desc: "Add version layer information."}
+  - {date: "30.09.16:", desc: "Fix umask."}
+  - {date: "11.09.16:", desc: "Add layer badges to README."}
+  - {date: "28.08.16:", desc: "Add badges to README."}
+  - {date: "20.08.16:", desc: "Rebase to alpine linux, move to main repository."}
+  - {date: "11.12.15:", desc: "Initial Release."}
