@@ -45,6 +45,7 @@ app_setup_block: |
   `change password ASAP.`
 # changelog
 changelogs:
+  - {date: "12.07.23:", desc: "Rebasing to Alpine 3.18."}
   - {date: "07.07.23:", desc: "Deprecate armhf. As announced [here](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)"}
   - {date: "13.02.23:", desc: "Rebase to Alpine 3.17, migrate to s6v3."}
   - {date: "19.01.22:", desc: "Rebasing to alpine 3.15."}
