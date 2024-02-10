@@ -27,7 +27,7 @@ RUN \
   echo "**** compile znc ****" && \
   if [ -z ${ZNC_RELEASE+x} ]; then \
     ZNC_RELEASE=$(curl -s https://api.github.com/repos/znc/znc/tags \
-    | jq -r ". | .[0].name"); \
+    | jq -r 'first(.[] | select(.name | contains("-rc") | not)) | .name'); \
   fi && \
   mkdir -p \
     /tmp/znc && \
