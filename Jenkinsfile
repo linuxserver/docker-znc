@@ -18,7 +18,7 @@ pipeline {
     GITLAB_NAMESPACE=credentials('gitlab-namespace-id')
     DOCKERHUB_TOKEN=credentials('docker-hub-ci-pat')
     JSON_URL = 'https://api.github.com/repos/znc/znc/tags'
-    JSON_PATH = '.[0].name'
+    JSON_PATH = 'first(.[] | select(.name | contains("-rc") | not)) | .name'
     BUILD_VERSION_ARG = 'ZNC_RELEASE'
     LS_USER = 'linuxserver'
     LS_REPO = 'docker-znc'
