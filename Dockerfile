@@ -37,35 +37,33 @@ RUN \
   fi && \
   mkdir -p \
     /tmp/znc && \
+  git clone --branch "${ZNC_RELEASE}" --depth 1 \
+    --recurse-submodules \
+    https://github.com/znc/znc.git \
+    /tmp/znc && \
   curl -o \
-  /tmp/znc-src.tar.gz -L \
-    "https://znc.in/releases/archive/${ZNC_RELEASE}.tar.gz" && \
-  tar xf \
-  /tmp/znc-src.tar.gz -C \
-    /tmp/znc --strip-components=1 && \
-  curl -o \
-  /tmp/playback.tar.gz -L \
+    /tmp/playback.tar.gz -L \
     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz && \
   tar xf \
-  /tmp/playback.tar.gz -C \
+    /tmp/playback.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-push.tar.gz -L \
+    /tmp/znc-push.tar.gz -L \
     https://github.com/jreese/znc-push/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-push.tar.gz -C \
+    /tmp/znc-push.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-clientbuffer.tar.gz -L \
+    /tmp/znc-clientbuffer.tar.gz -L \
     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-clientbuffer.tar.gz -C \
+    /tmp/znc-clientbuffer.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-palaver.tar.gz -L \
+    /tmp/znc-palaver.tar.gz -L \
     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-palaver.tar.gz -C \
+    /tmp/znc-palaver.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   cd /tmp/znc && \
   mkdir -p build && \
