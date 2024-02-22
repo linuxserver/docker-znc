@@ -7,10 +7,11 @@ FROM ghcr.io/linuxserver/baseimage-alpine:arm64v8-3.19 as buildstage
 ARG ZNC_RELEASE
 
 RUN \
-  echo "**** install build packages ****" && \
   apk add -U --update --no-cache \
+    argon2-dev \
     autoconf \
     automake \
+    boost-dev\
     build-base \
     c-ares-dev \
     cyrus-sasl-dev \
@@ -21,7 +22,11 @@ RUN \
     perl-dev \
     python3-dev \
     swig \
-    tcl-dev
+    tar \
+    tcl-dev && \
+  python3 -m venv /lsiopy && \
+  pip install -U --no-cache-dir pip setuptools && \
+  pip install -U --no-cache-dir cmake
 
 RUN \
   echo "**** compile znc ****" && \
@@ -31,57 +36,47 @@ RUN \
   fi && \
   mkdir -p \
     /tmp/znc && \
+  git clone --branch "${ZNC_RELEASE}" --depth 1 \
+    --recurse-submodules \
+    https://github.com/znc/znc.git \
+    /tmp/znc && \
   curl -o \
-  /tmp/znc-src.tar.gz -L \
-    "https://znc.in/releases/archive/${ZNC_RELEASE}.tar.gz" && \
-  tar xf \
-  /tmp/znc-src.tar.gz -C \
-    /tmp/znc --strip-components=1 && \
-  curl -o \
-  /tmp/playback.tar.gz -L \
+    /tmp/playback.tar.gz -L \
     https://github.com/jpnurmi/znc-playback/archive/master.tar.gz && \
   tar xf \
-  /tmp/playback.tar.gz -C \
+    /tmp/playback.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-push.tar.gz -L \
+    /tmp/znc-push.tar.gz -L \
     https://github.com/jreese/znc-push/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-push.tar.gz -C \
+    /tmp/znc-push.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-clientbuffer.tar.gz -L \
+    /tmp/znc-clientbuffer.tar.gz -L \
     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-clientbuffer.tar.gz -C \
+    /tmp/znc-clientbuffer.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   curl -o \
-  /tmp/znc-palaver.tar.gz -L \
+    /tmp/znc-palaver.tar.gz -L \
     https://github.com/cocodelabs/znc-palaver/archive/master.tar.gz && \
   tar xf \
-  /tmp/znc-palaver.tar.gz -C \
+    /tmp/znc-palaver.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
   cd /tmp/znc && \
-  export CFLAGS="$CFLAGS -D_GNU_SOURCE" && \
-  ./configure \
-    --build=$CBUILD \
-    --enable-cyrus \
-    --enable-perl \
-    --enable-python \
-    --enable-swig \
-    --enable-tcl \
-    --host=$CHOST \
-    --infodir=/usr/share/info \
-    --localstatedir=/var \
-    --mandir=/usr/share/man \
-    --prefix=/usr \
-    --sysconfdir=/etc && \
+  mkdir -p build && \
+  cd build && \
+  cmake .. \
+    -DWANT_PYTHON=yes \
+    -DWANT_PERL=yes \
+    -DWANT_TCL=yes && \
   make && \
   make DESTDIR=/tmp/znc install
 
 RUN \
   echo "**** determine runtime packages ****" && \
-  scanelf --needed --nobanner /tmp/znc/usr/bin/znc \
+  scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
     | sort -u \
     | xargs -r apk info --installed \
@@ -95,7 +90,7 @@ FROM ghcr.io/linuxserver/baseimage-alpine:arm64v8-3.19
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sparklyballs"
+LABEL maintainer="notaptalca"
 
 # copy files from build stage
 COPY --from=buildstage /tmp/znc/usr/ /usr/

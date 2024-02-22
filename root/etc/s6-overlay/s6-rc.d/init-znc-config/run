@@ -7,7 +7,7 @@ mkdir -p \
 
 # generate license file
 if [[ ! -f /config/znc.pem ]]; then
-    /usr/bin/znc -d /config -p
+    /usr/local/bin/znc -d /config -p
 fi
 
 while [[ ! -f "/config/znc.pem" ]]; do

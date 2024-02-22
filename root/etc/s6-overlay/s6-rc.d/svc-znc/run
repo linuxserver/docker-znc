@@ -5,5 +5,5 @@ PORT=$(grep "Port =" /config/configs/znc.conf | awk -F '=' '{print $2;exit}')
 
 exec \
     s6-notifyoncheck -d -n 300 -w 1000 -c "nc -z localhost ${PORT}" \
-        s6-setuidgid abc /usr/bin/znc -d /config \
+        s6-setuidgid abc /usr/local/bin/znc -d /config \
         --foreground
