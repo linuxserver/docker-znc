@@ -6,10 +6,6 @@ FROM ghcr.io/linuxserver/baseimage-alpine:3.19 as buildstage
 # package version
 ARG ZNC_RELEASE
 
-# common env
-ENV \
-  MAKEFLAGS="-j4"
-
 RUN \
   echo "**** install build packages ****" && \
   apk add -U --update --no-cache \
