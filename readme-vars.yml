@@ -38,14 +38,15 @@ optional_block_1: false
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
-  To log in to the application, browse to http://<hostip>:6501.
+  To log in to the application, browse to `http://<hostip>:6501`.
 
   * Default User: admin
   * Default Password: admin
   `change password ASAP.`
 # changelog
 changelogs:
-  - { date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
+  - {date: "22.02.24:", desc: "Update build system for v1.9.0 (use cmake)."}
+  - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
   - {date: "12.07.23:", desc: "Rebasing to Alpine 3.18."}
   - {date: "07.07.23:", desc: "Deprecate armhf. As announced [here](https://www.linuxserver.io/blog/a-farewell-to-arm-hf)"}
   - {date: "13.02.23:", desc: "Rebase to Alpine 3.17, migrate to s6v3."}
