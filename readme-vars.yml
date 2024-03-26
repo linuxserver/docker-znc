@@ -45,6 +45,7 @@ app_setup_block: |
   `change password ASAP.`
 # changelog
 changelogs:
+  - {date: "26.03.24:", desc: "Switch back to multi-threaded builds and ignore `-beta` and `-alpha` tags as well as `-rc`."}
   - {date: "22.02.24:", desc: "Update build system for v1.9.0 (use cmake)."}
   - {date: "23.12.23:", desc: "Rebase to Alpine 3.19."}
   - {date: "12.07.23:", desc: "Rebasing to Alpine 3.18."}
