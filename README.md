@@ -275,6 +275,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **06.06.24:** - Rebase to Alpine 3.20.
 * **26.03.24:** - Switch back to multi-threaded builds and ignore `-beta` and `-alpha` tags as well as `-rc`.
 * **22.02.24:** - Update build system for v1.9.0 (use cmake).
 * **23.12.23:** - Rebase to Alpine 3.19.
