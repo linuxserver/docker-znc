@@ -24,6 +24,8 @@ param_ports:
   - {external_port: "6501", internal_port: "6501", port_desc: "Port ZNC listens on."}
 
 readonly_supported: true
+readonly_message: |
+  * Not supported when running with SSL (Further debuging into why is appreciated)
 
 # application setup block
 app_setup_block_enabled: true
