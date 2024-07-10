@@ -41,7 +41,7 @@ Find us at:
 
 [Znc](http://wiki.znc.in/ZNC) is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC.
 
-[![znc](http://wiki.znc.in/resources/assets/wiki.png)](http://wiki.znc.in/ZNC)
+[![znc](https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png)](http://wiki.znc.in/ZNC)
 
 ## Supported Architectures
 
@@ -275,6 +275,7 @@ Once registered you can define the dockerfile to use with `-f Dockerfile.aarch64
 
 ## Versions
 
+* **10.06.24:** - Migrate default config file to newer format.
 * **06.06.24:** - Rebase to Alpine 3.20.
 * **26.03.24:** - Switch back to multi-threaded builds and ignore `-beta` and `-alpha` tags as well as `-rc`.
 * **22.02.24:** - Update build system for v1.9.0 (use cmake).
