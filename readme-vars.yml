@@ -3,10 +3,11 @@
 # project information
 project_name: znc
 project_url: "http://wiki.znc.in/ZNC"
-project_logo: "http://wiki.znc.in/resources/assets/wiki.png"
+project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
 project_blurb_optional_extras_enabled: false
+
 # supported architectures
 available_architectures:
   - {arch: "{{ arch_x86_64 }}", tag: "amd64-latest"}
@@ -21,6 +22,11 @@ param_volumes:
 param_usage_include_ports: true
 param_ports:
   - {external_port: "6501", internal_port: "6501", port_desc: "Port ZNC listens on."}
+
+readonly_supported: true
+readonly_message: |
+  * Not supported when running with SSL (Further debuging into why is appreciated)
+
 # application setup block
 app_setup_block_enabled: true
 app_setup_block: |
@@ -29,8 +35,10 @@ app_setup_block: |
   * Default User: admin
   * Default Password: admin
   `change password ASAP.`
+
 # changelog
 changelogs:
+  - {date: "10.06.24:", desc: "Migrate default config file to newer format."}
   - {date: "06.06.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "26.03.24:", desc: "Switch back to multi-threaded builds and ignore `-beta` and `-alpha` tags as well as `-rc`."}
   - {date: "22.02.24:", desc: "Update build system for v1.9.0 (use cmake)."}
