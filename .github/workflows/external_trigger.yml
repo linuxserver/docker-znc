@@ -15,7 +15,7 @@ jobs:
           SKIP_EXTERNAL_TRIGGER: ${{ vars.SKIP_EXTERNAL_TRIGGER }}
         run: |
           printf "# External trigger for docker-znc\n\n" >> $GITHUB_STEP_SUMMARY
-          if grep -wq "^znc_master$" <<< "${SKIP_EXTERNAL_TRIGGER}"; then
+          if grep -q "^znc_master" <<< "${SKIP_EXTERNAL_TRIGGER}"; then
             echo "> [!WARNING]" >> $GITHUB_STEP_SUMMARY
             echo "> Github organizational variable \`SKIP_EXTERNAL_TRIGGER\` contains \`znc_master\`; skipping trigger." >> $GITHUB_STEP_SUMMARY
             exit 0
