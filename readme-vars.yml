@@ -6,6 +6,7 @@ project_url: "http://wiki.znc.in/ZNC"
 project_logo: "https://raw.githubusercontent.com/linuxserver/docker-templates/master/linuxserver.io/img/znc-logo.png"
 project_blurb: "[{{ project_name|capitalize }}]({{ project_url }}) is an IRC network bouncer or BNC. It can detach the client from the actual IRC server, and also from selected channels. Multiple clients from different locations can connect to a single ZNC account simultaneously and therefore appear under the same nickname on IRC."
 project_lsio_github_repo_url: "https://github.com/linuxserver/docker-{{ project_name }}"
+project_categories: "IRC"
 project_blurb_optional_extras_enabled: false
 # supported architectures
 available_architectures:
