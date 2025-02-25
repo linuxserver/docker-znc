@@ -17,6 +17,7 @@ RUN \
     boost-dev\
     build-base \
     c-ares-dev \
+    curl-dev \
     cyrus-sasl-dev \
     gettext-dev \
     git \
@@ -55,6 +56,7 @@ RUN \
   tar xf \
     /tmp/znc-push.tar.gz -C \
     /tmp/znc/modules --strip-components=1 && \
+    sed -i '1i #define USE_CURL' /tmp/znc/modules/push.cpp && \
   curl -o \
     /tmp/znc-clientbuffer.tar.gz -L \
     https://github.com/CyberShadow/znc-clientbuffer/archive/master.tar.gz && \
