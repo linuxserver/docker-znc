@@ -79,7 +79,7 @@ RUN \
 
 RUN \
   echo "**** determine runtime packages ****" && \
-  scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc \
+  scanelf --needed --nobanner /tmp/znc/usr/local/bin/znc /tmp/znc/usr/local/lib/znc/ \
     | awk '{ gsub(/,/, "\nso:", $2); print "so:" $2 }' \
     | sort -u \
     | xargs -r apk info --installed \
