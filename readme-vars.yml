@@ -79,6 +79,7 @@ init_diagram: |
   "znc:latest" <- Base Images
 # changelog
 changelogs:
+  - {date: "27.07.25:", desc: "Rebase to Alpine 3.22."}
   - {date: "10.06.24:", desc: "Migrate default config file to newer format."}
   - {date: "06.06.24:", desc: "Rebase to Alpine 3.20."}
   - {date: "26.03.24:", desc: "Switch back to multi-threaded builds and ignore `-beta` and `-alpha` tags as well as `-rc`."}
